@@ -3,13 +3,12 @@ import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, where
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyClfzXcDdoKFCs8Yoq5gWP_vmYPTpVEohc",
-  authDomain: "budget-app-7f25f.firebaseapp.com",
-  projectId: "budget-app-7f25f",
-  storageBucket: "budget-app-7f25f.firebasestorage.app",
-  messagingSenderId: "176734186971",
-  appId: "1:176734186971:web:5c76713d7afed1ac928bfe"
-
+  apiKey: "AIzaSyBSKcA-H-H2FTIcyWGjXr1T2YqTSozBuT4",
+  authDomain: "budgetapp-dbdad.firebaseapp.com",
+  projectId: "budgetapp-dbdad",
+  storageBucket: "budgetapp-dbdad.firebasestorage.app",
+  messagingSenderId: "260683084022",
+  appId: "1:260683084022:web:6e12560e3e5dd0ad64fcd7"
 };
 
 const app = initializeApp(firebaseConfig);

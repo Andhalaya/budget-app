@@ -1,21 +1,33 @@
-import { useAuth } from "../../context/AuthContext"; // Adjust path if necessary
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import Transactions from "../transactions/Transactions";
+import Drawer from "../../components/Drawer/Drawer";
+import { useState } from "react";
+import Categories from "../categories/Categories";
 
 export default function Home() {
-  const { user, logout } = useAuth();
-  const navigate = useNavigate();
+  const { user } = useAuth();
+  const [activeComponent, setActiveComponent] = useState("home");
 
-  const handleLogout = async () => {
-    await logout();
-    navigate("/login"); // Ensure redirection after logout
+  const components = {
+    home: <h2>Welcome to the dashboard, {user?.email}!</h2>,
+    transactions: <Transactions />,
+    categories: <Categories />,
+    settings: <h2>Settings Page</h2>,
   };
 
   return (
-    <div>
-      <h1>Welcome, {user?.email}!</h1>
-      <button onClick={handleLogout}>Logout</button>
-      <Transactions />
+    <div style={{ display: "flex" }}>
+      <Drawer onSelect={setActiveComponent} />
+      <div>
+      <div>
+        <div >
+          <div>
+            {components[activeComponent] || <h2>Page Not Found</h2>}
+          </div>
+        </div>
+      </div>
+      </div>
+      
     </div>
   );
 }

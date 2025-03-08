@@ -7,7 +7,6 @@ import {
   onAuthStateChanged 
 } from "firebase/auth";
 
-
 const AuthContext = createContext();
 
 export function useAuth() {
@@ -17,7 +16,6 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [error, setError] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -28,6 +26,7 @@ export function AuthProvider({ children }) {
 
   const register = async (email, password) => {
     try {
+      setError(""); // Clear previous errors
       await createUserWithEmailAndPassword(auth, email, password);
     } catch (error) {
       setError(error.message);
@@ -36,23 +35,21 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     try {
+      setError(""); // Clear previous errors
       const response = await signInWithEmailAndPassword(auth, email, password);
-      console.log(response);
-      console.log(response.user.email);
-      if(response.data.user) {
-        setIsLoggedIn(true);
-      } else {
-        setIsLoggedIn(false);
-      }
-      
+      setUser(response.user);
     } catch (error) {
       setError(error.message);
     }
   };
 
   const logout = async () => {
-    await signOut(auth);
-    
+    try {
+      await signOut(auth);
+      setUser(null);
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   return (

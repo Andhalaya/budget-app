@@ -3,6 +3,8 @@ import { AuthProvider } from "./context/AuthContext"; // Import AuthProvider
 import Login from "./pages/login/Login"; // Login/Register form
 import Home from "./pages/home/Home"; // Home page component
 import ProtectedRoute from "./components/ProtectedRoute"; // Import ProtectedRoute
+import Transactions from "./pages/transactions/Transactions";
+import "./App.css";
 
 function App() {
   return (
@@ -15,6 +17,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/transactions"
+            element={
+              <ProtectedRoute>
+                <Transactions />
               </ProtectedRoute>
             }
           />
