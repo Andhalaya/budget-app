@@ -3,6 +3,8 @@ import Transactions from "../transactions/Transactions";
 import Drawer from "../../components/Drawer/Drawer";
 import { useState } from "react";
 import Categories from "../categories/Categories";
+import MonthlyBudget from "../monthlyBudget/MonthlyBudget";
+import AnualBudget from "../anualBudget/AnualBudget";
 
 export default function Home() {
   const { user } = useAuth();
@@ -13,6 +15,8 @@ export default function Home() {
     transactions: <Transactions />,
     categories: <Categories />,
     settings: <h2>Settings Page</h2>,
+    monthly: <MonthlyBudget />,
+    anual: <AnualBudget />
   };
 
   return (

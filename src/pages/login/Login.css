@@ -1,0 +1,33 @@
+.login{
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  height: 100vh; 
+}
+
+.login-box{
+    background-color: rgb(233, 233, 233);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 200px;
+}
+
+.login-form button{
+    align-self: center;
+    padding: 0px 20px;
+}
+

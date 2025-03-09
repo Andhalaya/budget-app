@@ -3,12 +3,13 @@ import { useTransactions } from "../../hooks/useTransactions";
 import { useCategories } from "../../hooks/useCategories"; // Import categories hook
 import { useAuth } from "../../context/AuthContext";
 import TransactionsTable from "../../components/TransactionsTable";
+import * as Icons from "../../assets/Icons"
+import './Transactions.css'
 
 export default function Transactions() {
   const { transactions, addOrUpdateTransaction, deleteTransaction } = useTransactions();
   const { categories } = useCategories(); // Fetch categories
   const { user } = useAuth();
-
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [subcategory, setSubcategory] = useState("");
@@ -61,11 +62,11 @@ export default function Transactions() {
   };
 
   return (
-    <div>
-      <h2>Transactions</h2>
+    <div className="transactions">
+      <h1>Transactions</h1>
 
       {/* Close button */}
-      <button
+      <div
         onClick={() => {
           if (showForm) {
             setDescription("");
@@ -79,8 +80,8 @@ export default function Transactions() {
         }}
         style={{ marginBottom: "10px" }}
       >
-        {showForm ? "Close" : "+"}
-      </button>
+      {showForm ? <button>CLOSE</button> : <div className="add-btn">+ Add new transaction</div>}
+      </div>
 
       {/* Add/Edit form */}
       {showForm && (
@@ -126,7 +127,9 @@ export default function Transactions() {
             <option value="income">Income</option>
             <option value="expense">Expense</option>
           </select>
-          <button type="submit">{editId ? "Update Transaction" : "Add Transaction"}</button>
+          <button type="submit">{editId ? 
+          "Update Transaction" 
+          : "Add Transaction"}</button>
         </form>
       )}
 
@@ -138,3 +141,4 @@ export default function Transactions() {
     </div>
   );
 }
+ 

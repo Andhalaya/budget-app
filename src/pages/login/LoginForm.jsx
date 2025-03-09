@@ -30,10 +30,10 @@ export default function AuthForm() {
   };
 
   return (
-    <div className="auth-container">
+    <div className="login-box">
       <h2>{isLogin ? "Login" : "Register"}</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form className="login-form" onSubmit={handleSubmit}>
+        <div className="column">
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -43,7 +43,7 @@ export default function AuthForm() {
             required
           />
         </div>
-        <div>
+        <div className="column">
           <label htmlFor="password">Password:</label>
           <input
             type="password"

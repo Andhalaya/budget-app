@@ -1,0 +1,21 @@
+.transactions{
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    gap: 20px;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+th, td{
+    text-align: left;
+    padding: 10px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #c7c6c6;
+  }

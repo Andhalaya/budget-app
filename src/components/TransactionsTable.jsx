@@ -1,6 +1,9 @@
+import * as Icons from "../assets/Icons"
+import "../pages/transactions/Transactions.css"
+
 export default function TransactionsTable({ transactions, onEdit, onDelete }) {
     return (
-      <table border="1" cellPadding="8" cellSpacing="0" style={{ width: "100%", textAlign: "center" }}>
+      <table cellPadding="10" cellSpacing="0" style={{ width: "100%", textAlign: "center" }}>
         <thead>
           <tr>
             <th>Description</th>
@@ -14,7 +17,7 @@ export default function TransactionsTable({ transactions, onEdit, onDelete }) {
         <tbody>
           {transactions.length > 0 ? (
             transactions.map((transaction) => (
-              <tr key={transaction.id}>
+              <tr className="t-row" key={transaction.id}>
                 <td>{transaction.description}</td>
                 <td>{transaction.category}</td>
                 <td>{transaction.subcategory}</td>
@@ -22,11 +25,9 @@ export default function TransactionsTable({ transactions, onEdit, onDelete }) {
                 <td style={{ color: transaction.type === "income" ? "green" : "red" }}>
                   {transaction.type}
                 </td>
-                <td>
-                  <button onClick={() => onEdit(transaction)}>Edit</button>
-                  <button onClick={() => onDelete(transaction.id)} style={{ marginLeft: "5px" }}>
-                    Delete
-                  </button>
+                <td className="actions">
+                  <Icons.HiPencil className="icon" onClick={() => onEdit(transaction)}/>
+                  <Icons.MdDelete className="icon" onClick={() => onDelete(transaction.id)} />
                 </td>
               </tr>
             ))

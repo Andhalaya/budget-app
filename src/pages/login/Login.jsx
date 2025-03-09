@@ -1,11 +1,10 @@
-import { useAuth } from "../../context/AuthContext";
+
 import LoginForm from "./LoginForm";
+import "./Login.css"
 
 function Login() {
-  const { login } = useAuth();
-
   return (
-    <div className="">
+    <div className="login">
       <LoginForm />
     </div>
   );

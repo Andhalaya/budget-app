@@ -15,7 +15,6 @@ export default function Drawer({ onSelect }) {
     navigate("/login");
   };
 
-
   return (
     <div className={`drawer ${isOpen ? "open" : "closed"}`}>
       <button className="toggle-btn" onClick={() => setIsOpen(!isOpen)}>
@@ -36,6 +35,14 @@ export default function Drawer({ onSelect }) {
       <button onClick={() => onSelect("settings")}>
         <FaCog />
         {isOpen && <span>Settings</span>}
+      </button>
+      <button onClick={() => onSelect("monthly")}>
+        <Icons.IoCalendarNumberSharp />
+        {isOpen && <span>Monthly Budget</span>}
+      </button>
+      <button onClick={() => onSelect("anual")}>
+        <Icons.FaCalendarAlt />
+        {isOpen && <span>Anual budget</span>}
       </button>
       {isOpen ? 
         <button onClick={handleLogout}>
