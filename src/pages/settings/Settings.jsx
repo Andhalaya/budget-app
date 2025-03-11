@@ -10,10 +10,13 @@ function Settings() {
             </div>
             <div className='summary'>
                 <div className='s-list'>
-                  <h2>Summary</h2>
+                    <h2>Summary</h2>
                   <div className='summary-container'>
                     <div className="summary-box">
-                        <h3>Income</h3>
+                    <div className='s-list-title'>
+                       <h3>Income</h3>
+                      <h3>1000$</h3>  
+                    </div>    
                         <div className='list-element'>
                             <p>Personal</p>
                             <p>400$</p>
