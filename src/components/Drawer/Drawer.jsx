@@ -23,38 +23,38 @@ Tracker
      
       <div className="navigation">
         <button onClick={() => onSelect("dashboard")}>
-          <FaHome />
+          <FaHome className="icon"/>
           {isOpen && <span>Dashboard</span>}
         </button>
         <button onClick={() => onSelect("categories")}>
-          <Icons.BiSolidCategory />
+          <Icons.BiSolidCategory className="icon"/>
           {isOpen && <span>Categories</span>}
         </button>
         <button onClick={() => onSelect("transactions")}>
-          <FaExchangeAlt />
+          <FaExchangeAlt className="icon"/>
           {isOpen && <span>Transactions</span>}
         </button>
         <button onClick={() => onSelect("settings")}>
-          <FaCog />
+          <FaCog className="icon"/>
           {isOpen && <span>Settings</span>}
         </button>
         <button onClick={() => onSelect("monthly")}>
-          <Icons.IoCalendarNumberSharp />
+          <Icons.IoCalendarNumberSharp className="icon"/>
           {isOpen && <span>Monthly Budget</span>}
         </button>
         <button onClick={() => onSelect("anual")}>
-          <Icons.FaCalendarAlt />
+          <Icons.FaCalendarAlt className="icon"/>
           {isOpen && <span>Anual budget</span>}
         </button>
         {isOpen ?
           <button onClick={handleLogout}>
-            <Icons.MdLogout /> Logout
+            <Icons.MdLogout className="icon"/> Logout
           </button>
           : null}
 
       </div> 
       <button className="toggle-btn" onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? "X" : <Icons.GiHamburgerMenu />}
+        {isOpen ? "X" : <Icons.GiHamburgerMenu className="icon"/>}
       </button>
     </div>
 
