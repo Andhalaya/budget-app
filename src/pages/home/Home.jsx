@@ -1,37 +1,31 @@
-import { useAuth } from "../../context/AuthContext";
+
 import Transactions from "../transactions/Transactions";
 import Drawer from "../../components/Drawer/Drawer";
 import { useState } from "react";
 import Categories from "../categories/Categories";
 import MonthlyBudget from "../monthlyBudget/MonthlyBudget";
 import AnualBudget from "../anualBudget/AnualBudget";
+import Dashboard from "../Dashboard.jsx/Dashboard";
+import Settings from "../settings/settings";
 
 export default function Home() {
-  const { user } = useAuth();
-  const [activeComponent, setActiveComponent] = useState("home");
+  const [activeComponent, setActiveComponent] = useState("dashboard");
 
   const components = {
-    home: <h2>Welcome to the dashboard, {user?.email}!</h2>,
+    dashboard: <Dashboard />,
     transactions: <Transactions />,
     categories: <Categories />,
-    settings: <h2>Settings Page</h2>,
+    settings: <Settings />,
     monthly: <MonthlyBudget />,
     anual: <AnualBudget />
   };
 
   return (
-    <div style={{ display: "flex" }}>
+    <div className="home">
       <Drawer onSelect={setActiveComponent} />
-      <div>
-      <div>
-        <div >
-          <div>
+          <div className="main">
             {components[activeComponent] || <h2>Page Not Found</h2>}
-          </div>
-        </div>
-      </div>
-      </div>
-      
+          </div> 
     </div>
   );
 }

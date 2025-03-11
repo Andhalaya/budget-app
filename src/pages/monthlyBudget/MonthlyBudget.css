@@ -1,0 +1,30 @@
+.month-budget{
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    gap: 20px;
+}
+
+.summary{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.month-boxes{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.subcategory-title{
+    background-color: rgba(0, 0, 0, 0.199);
+    padding: 10px;
+    font-size: 13px;
+}
+
+.m-transactions{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
