@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { useTransactions } from "../../hooks/useTransactions";
-import { useCategories } from "../../hooks/useCategories";
 import './MonthlyBudget.css'
 
 export default function MonthlyBudget() {
-    const { transactions } = useTransactions(); // Fetch transactions
+    const { transactions } = useTransactions();
     const [monthlyTransactions, setMonthlyTransactions] = useState([]);
     const [totalIncome, setTotalIncome] = useState(0);
     const [totalExpenses, setTotalExpenses] = useState(0);
@@ -70,84 +69,80 @@ export default function MonthlyBudget() {
 
 
     return (
-        <div className="month-budget">
+        <div className="monthly-budget">
             <div className="title">
-                <h1>Monthly Budget</h1>
-                <h2>{currentMonthName}</h2>
+                <h1>{currentMonthName}</h1>
+                <h2>Monthly Budget</h2>
             </div>
             <div className="summary">
-                <div className="income">
-                    <div className="flex">
-                        <h3>Total Income</h3>
-                        <p>${totalIncome.toFixed(2)}</p>
-                    </div>
-                    <div className="box">
-                        {Object.keys(categoryIncomes).map((category) => (
-                            <div className="list-element flex" key={category}>
-                                {category}
-                                <div>${categoryIncomes[category].toFixed(2)}</div>
+                <div className="s-list">
+                    <h2>Summary</h2>
+                    <div className='summary-container'>
+                        <div className="summary-box">
+                            <div className='s-list-title'>
+                                <h3>Income</h3>
+                                <h3>${totalIncome.toFixed(2)}</h3>
                             </div>
-                        ))}
-                    </div>
-                </div>
-                <div className="expenses">
-                    <div className="flex">
-                        <h3>Total Expenses</h3>
-                        <p>${totalExpenses.toFixed(2)}</p>
-                    </div>
-                    <div className="box">
-                        {Object.keys(categoryExpenses).map((category) => {
-                            const categoryTotal = Object.values(categoryExpenses[category]).reduce((sum, subAmount) => sum + subAmount, 0);
-                            return (
-                                <div className="list-element flex" key={category}>
+                            {Object.keys(categoryIncomes).map((category) => (
+                                <div className="list-element" key={category}>
                                     {category}
-                                    <div>- ${categoryTotal.toFixed(2)}</div>
+                                    <div>{categoryIncomes[category].toFixed(2)}$</div>
                                 </div>
-                            );
-                        })}
+                            ))}
+                        </div>
+                        <div className="summary-box">
+                            <div className="s-list-title">
+                                <h3>Expenses</h3>
+                                <h3>${totalExpenses.toFixed(2)}</h3>
+                            </div>
+                            {Object.keys(categoryExpenses).map((category) => {
+                                const categoryTotal = Object.values(categoryExpenses[category]).reduce((sum, subAmount) => sum + subAmount, 0);
+                                return (
+                                    <div className="list-element" key={category}>
+                                        {category}
+                                        <div>{categoryTotal.toFixed(2)}$</div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                        <div className="summary-box">
+                            <h3>Savings</h3>
+                            <div className='list-element'>
+                                <div>{savings.toFixed(2)}$</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div className="savings">
-                    <h3>Savings</h3>
-                    <div className="box">
-                        <p>${savings.toFixed(2)}</p>
-                    </div>
-                </div>
+                <div className="chart"></div>
             </div>
-            <div className="month-boxes flex-gap">
+            <div className="expenses-boxes">
                 {/* Expenses by Category */}
                 {Object.keys(categoryExpenses).map((category) => {
                     const categoryTotal = Object.values(categoryExpenses[category]).reduce((sum, subAmount) => sum + subAmount, 0);
                     return (
-                        <div key={category}>
-                            <div className="flex">
-                                <h3>{category}</h3>
-                                <div><strong>${categoryTotal.toFixed(2)}</strong></div>
-                            </div>
-                            <div className="box">
-                                {Object.keys(categoryExpenses[category]).map((subcategory) => (
-                                    <div key={subcategory}>
-                                        <div className="subcategory-title flex">
-                                            {subcategory}
-                                            <div>
-                                                - ${categoryExpenses[category][subcategory].toFixed(2)}
-                                            </div>
-                                        </div>
-                                        <div className="m-transactions">
-                                            {monthlyTransactions
-                                            .filter(t => t.category === category && t.subcategory === subcategory)
-                                            .map((t, index) => (
-                                                <div key={index} className="list-element flex">
-                                                    {t.description}
-                                                    <div>{t.amount.toFixed(2)}</div>
-                                                </div>
-                                            ))
-                                            }
-                                        </div>
+                        <div key={category} className="e-box">
+                            <h3>{category}</h3>
+                            {Object.keys(categoryExpenses[category]).map((subcategory) => (
+                                <div key={subcategory} className="list">
+                                    <div className="cat-box" >
+                                        <div className="cat-box-title">{subcategory}</div>
+                                       {categoryExpenses[category][subcategory].toFixed(2)} $
                                     </div>
-                                ))}
+                                    {monthlyTransactions
+                                        .filter(t => t.category === category && t.subcategory === subcategory)
+                                        .map((t, index) => (
+                                            <div key={index} className="list-element">
+                                                <p>{t.description}</p>
+                                                <p>{t.amount.toFixed(2)}$</p>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            ))}
+                            <div className="total">
+                                <h3>Total</h3>
+                                <h3>${categoryTotal.toFixed(2)}</h3>
                             </div>
-
                         </div>
                     )
                 }

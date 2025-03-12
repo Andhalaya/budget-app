@@ -78,6 +78,7 @@ background: radial-gradient(circle, rgb(201, 162, 255) 20%, rgb(0, 89, 255) 100%
 .list{
     display: flex;
     flex-direction: column;
+    height: 100%;
     gap: 5px;
     overflow-y: scroll;
 }

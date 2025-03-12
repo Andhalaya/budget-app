@@ -2,6 +2,7 @@ import { useState } from "react";
 import * as Icons from "../../assets/Icons";
 import { useCategories } from "../../hooks/useCategories";
 import "./Categories.css";
+import DropdownSelector from "../../components/Dropdown/DropdownSelector";
 
 export default function Categories() {
     const {
@@ -25,12 +26,37 @@ export default function Categories() {
     const [newCategoryName, setNewCategoryName] = useState("");
     const [showCategoryForm, setShowCategoryForm] = useState(false);
     const [showSubcategoryForm, setShowSubcategoryForm] = useState(false);
+    const [color, setColor] = useState("#000000");
+    const [icon, setIcon] = useState("FaUtensils");
+
+    const colorOptions = [
+        { name: "Red", value: "#e74c3c" },
+        { name: "Blue", value: "#3498db" },
+        { name: "Green", value: "#2ecc71" },
+        { name: "Yellow", value: "#f1c40f" },
+        { name: "Purple", value: "#9b59b6" },
+        { name: "Orange", value: "#e67e22" },
+        { name: "Gray", value: "#95a5a6" },
+    ];
+
+    const iconOptions = [
+        { name: "Food", value: "FaUtensils", component: <Icons.FaUtensils /> },
+        { name: "Transport", value: "FaCar", component: <Icons.FaCar /> },
+        { name: "Home", value: "FaHome", component: <Icons.FaHome /> },
+        { name: "Shopping", value: "FaShoppingCart", component: <Icons.FaShoppingCart /> },
+        { name: "Travel", value: "FaPlane", component: <Icons.FaPlane /> },
+        { name: "Health", value: "FaHeart", component: <Icons.FaHeart /> },
+        { name: "Utilities", value: "FaBolt", component: <Icons.FaBolt /> },
+        { name: "Entertainment", value: "FaMusic", component: <Icons.FaMusic /> },
+    ];
 
     // Handle Category Submission
     const handleSubmit = (e) => {
         e.preventDefault();
-        addOrUpdateCategory(name, [], editId);
+        addOrUpdateCategory(name, color, icon, [], editId);
         setName("");
+        setColor("#000000");
+        setIcon("FaUtensils");
         setEditId(null);
     };
 
@@ -79,7 +105,7 @@ export default function Categories() {
 
             {/* Category Form */}
             <div className="category-form">
-                {showCategoryForm ?  <form onSubmit={handleSubmit}>
+                {showCategoryForm ? <form onSubmit={handleSubmit}>
                     <input
                         type="text"
                         placeholder="Category Name"
@@ -87,36 +113,38 @@ export default function Categories() {
                         onChange={(e) => setName(e.target.value)}
                         required
                     />
+                    <DropdownSelector options={colorOptions} selected={color} setSelected={setColor} type="color" />
+                    <DropdownSelector options={iconOptions} selected={icon} setSelected={setIcon} type="icon" />
                     <button type="submit">Add</button>
                     <button onClick={() => setShowCategoryForm(false)}>cancel</button>
-                </form> 
-                : <button className="add-btn" onClick={() => setShowCategoryForm(true)}>+ Add category </button>
-                
-            }
+                </form>
+                    : <button className="add-btn" onClick={() => setShowCategoryForm(true)}>+ Add category </button>
+
+                }
                 {/* Add Subcategory Form */}
-                {showSubcategoryForm ? 
-                <form onSubmit={handleAddSubcategory}>
-                    <select
-                        onChange={(e) => setSelectedCategoryId(e.target.value)}
-                        value={selectedCategoryId || ""}
-                        required
-                    >
-                        <option value="" disabled>Select Category</option>
-                        {categories.map((cat) => (
-                            <option key={cat.id} value={cat.id}>{cat.name}</option>
-                        ))}
-                    </select>
-                    <input
-                        type="text"
-                        placeholder="Subcategory Name"
-                        value={subcategoryName}
-                        onChange={(e) => setSubcategoryName(e.target.value)}
-                        required
-                    />
-                    <button type="submit">Add Subcategory</button>
-                    <button onClick={() => setShowSubcategoryForm(false)}>cancel</button>
-                </form> 
-                : <button className="add-btn" onClick={() => setShowSubcategoryForm(true) }>+ Add subcategory</button>} 
+                {showSubcategoryForm ?
+                    <form onSubmit={handleAddSubcategory}>
+                        <select
+                            onChange={(e) => setSelectedCategoryId(e.target.value)}
+                            value={selectedCategoryId || ""}
+                            required
+                        >
+                            <option value="" disabled>Select Category</option>
+                            {categories.map((cat) => (
+                                <option key={cat.id} value={cat.id}>{cat.name}</option>
+                            ))}
+                        </select>
+                        <input
+                            type="text"
+                            placeholder="Subcategory Name"
+                            value={subcategoryName}
+                            onChange={(e) => setSubcategoryName(e.target.value)}
+                            required
+                        />
+                        <button type="submit">Add Subcategory</button>
+                        <button onClick={() => setShowSubcategoryForm(false)}>cancel</button>
+                    </form>
+                    : <button className="add-btn" onClick={() => setShowSubcategoryForm(true)}>+ Add subcategory</button>}
             </div>
 
 
@@ -128,29 +156,33 @@ export default function Categories() {
                     <div className="categories-box">
                         <h3>Categories</h3>
                         <div className="box">
-                            {categories.map((category) => (
-                                <div className="list-element" key={category.id}>
-                                    {editingCategory === category.id ? (
-                                        <>
-                                            <input
-                                                type="text"
-                                                value={newCategoryName}
-                                                onChange={(e) => setNewCategoryName(e.target.value)}
-                                            />
-                                            <button onClick={handleSaveCategory}>Save</button>
-                                        </>
-                                    ) : (
-                                        <div className="flex">
-                                            <div>{category.name}</div>
-                                            <div className="actions">
-                                                <Icons.HiPencil className="icon" onClick={() => handleEditCategory(category)} />
-                                                <Icons.MdDelete className="icon" onClick={() => deleteCategory(category.id)} />
-                                            </div>
+                            {categories.map((category) => {
+                                const IconComponent = iconOptions.find((icon) => icon.value === category.icon)?.component || <Icons.FaUtensils />;
+                                return (
+                                    <div className="list-element" key={category.id} style={{ backgroundColor: category.color }}>
+                                        {editingCategory === category.id ? (
+                                            <>
+                                                <input
+                                                    type="text"
+                                                    value={newCategoryName}
+                                                    onChange={(e) => setNewCategoryName(e.target.value)}
+                                                />
+                                                <button onClick={handleSaveCategory}>Save</button>
+                                            </>
+                                        ) : (
+                                            <div className="flex">
+                                                <div>{category.name}</div>
+                                                <div style={{ fontSize: "20px", marginRight: "10px" }}>{IconComponent}</div>
+                                                <div className="actions">
+                                                    <Icons.HiPencil className="icon" onClick={() => handleEditCategory(category)} />
+                                                    <Icons.MdDelete className="icon" onClick={() => deleteCategory(category.id)} />
+                                                </div>
 
-                                        </div>
-                                    )}
-                                </div>
-                            ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                )
+                            })}
                         </div>
                     </div>
                     <div className="subcategories-box">

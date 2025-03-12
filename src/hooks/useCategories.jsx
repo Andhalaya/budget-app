@@ -39,11 +39,11 @@ export function useCategories() {
     };
   
     // Add or Update a Category
-    const addOrUpdateCategory = async (name, subcategories = [], editId = null) => {
+    const addOrUpdateCategory = async (name, color, icon, subcategories = [], editId = null) => {
       if (!name.trim()) return;
   
       try {
-        const categoryData = { name, subcategories };
+        const categoryData = { name, color, icon, subcategories };
   
         if (editId) {
           const categoryRef = doc(db, "categories", editId);
@@ -52,7 +52,7 @@ export function useCategories() {
           await addDoc(categoriesRef, categoryData);
         }
   
-        fetchCategories(); // Refresh the list
+        fetchCategories(); 
       } catch (error) {
         console.error("Error saving category:", error);
         setError(error.message);
