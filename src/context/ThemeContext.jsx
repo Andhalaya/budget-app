@@ -1,51 +1,41 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
+import { useAuth } from "./AuthContext";
+import { db } from "../config/firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import themes from "../context/colors"; 
 
 export const ThemeContext = createContext();
 
-const themes = {
-    light: {
-        name: "light",
-        background: "#ffffff",
-        text: "#000000",
-        sidebar: "#ffffff6f",
-        primary: "#3498db"
-    },
-    dark: {
-        name: "dark",
-        background: "#1a1a1a",
-        text: "#ffffff",
-        sidebar: "#333",
-        primary: "#e67e22"
-    },
-    ocean: {
-        name: "ocean",
-        background: "#2c3e50",
-        text: "#ecf0f1",
-        sidebar: "#34495e",
-        primary: "#16a085"
-    },
-    purple: {
-        name: "purple",
-        background: "#3d214a",
-        text: "#f8c471",
-        sidebar: "#4a235a",
-        primary: "#8e44ad"
-    }
-};
-
 export function ThemeProvider({ children }) {
-    const [theme, setTheme] = useState(() => {
-        return localStorage.getItem("theme") || "light";
-    });
+    const { user } = useAuth();
+    const [theme, setTheme] = useState("light");
 
     useEffect(() => {
-        localStorage.setItem("theme", theme);
+        const fetchTheme = async () => {
+            if (user) {
+                const userDoc = await getDoc(doc(db, "users", user.uid));
+                if (userDoc.exists() && userDoc.data().theme) {
+                    setTheme(userDoc.data().theme);
+                }
+            }
+        };
+        fetchTheme();
+    }, [user]);
+
+    useEffect(() => {
+        if (user) {
+            setDoc(doc(db, "users", user.uid), { theme }, { merge: true });
+        }
         const themeVars = themes[theme];
-        document.documentElement.style.setProperty("--background", themeVars.background);
-        document.documentElement.style.setProperty("--text", themeVars.text);
-        document.documentElement.style.setProperty("--sidebar", themeVars.sidebar);
-        document.documentElement.style.setProperty("--primary", themeVars.primary);
-    }, [theme]);
+        if (themeVars) {
+            document.documentElement.style.setProperty("--background1", themeVars.background1);
+            document.documentElement.style.setProperty("--background2", themeVars.background2);
+            document.documentElement.style.setProperty("--text", themeVars.text);
+            document.documentElement.style.setProperty("--boxes", themeVars.boxes);
+            document.documentElement.style.setProperty("--primary", themeVars.primary);
+            document.documentElement.style.setProperty("--bars", themeVars.bars);
+        }
+    }, [theme, user]);
 
     return (
         <ThemeContext.Provider value={{ theme, setTheme, themes }}>

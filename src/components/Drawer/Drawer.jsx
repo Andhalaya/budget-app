@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useContext } from "react";
+import { ThemeContext } from "../../context/ThemeContext";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import * as Icons from "../../assets/Icons";
-import { FaHome, FaExchangeAlt, FaCog } from "react-icons/fa";
+import { FaHome, FaExchangeAlt, FaCog, FaMoon, FaSun } from "react-icons/fa";
 import "./Drawer.css";
 
 export default function Drawer({ onSelect, isOpen, setIsOpen }) {
@@ -13,6 +15,11 @@ export default function Drawer({ onSelect, isOpen, setIsOpen }) {
     await logout();
     navigate("/login");
   };
+  const { theme, setTheme, themes } = useContext(ThemeContext);
+
+const toggleTheme = () => {
+  setTheme(theme === "light" ? "dark" : "light");
+};
 
   return (
     <div className={`drawer ${isOpen ? "open" : "closed"}`}>
@@ -36,8 +43,9 @@ export default function Drawer({ onSelect, isOpen, setIsOpen }) {
           <div className={`search-btn ${isOpen ? "circle" : "circle closed"}`} onClick={handleLogout}>
             <Icons.MdLogout className="icon-big"/>
           </div>
-          <div className="darkMode-btn circle" >
-          </div>
+          <div className="darkMode-btn circle" onClick={toggleTheme}>
+  {theme === "light" ? <FaMoon className="icon-big" /> : <FaSun className="icon-big" />}
+</div>
           <div className={`search-btn ${isOpen ? "circle" : "circle closed"}`}>
             <Icons.IoSearch className="icon"/>
           </div>

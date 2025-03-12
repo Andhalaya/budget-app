@@ -35,7 +35,6 @@ export default function Home() {
   };
 
   return (
-    
     <div className="home">
       <Drawer onSelect={setActiveComponent} isOpen={isDrawerOpen} setIsOpen={setIsDrawerOpen}/>
           <div className={`main ${isDrawerOpen ? "expanded" : "collapsed"}`}>

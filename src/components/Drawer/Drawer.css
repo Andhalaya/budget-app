@@ -6,6 +6,7 @@
     transition: 0.3s ease-in-out;
     height: 100vh;
     position: fixed;
+    
   }
   
   .drawer.open {
@@ -39,7 +40,8 @@
   }
 
   .navigation{
-    background-color: #ffffff6f;
+    background-color: var(--boxes);
+    color: var(--text);
     backdrop-filter: blur(5px);
     border-radius: 20px;
     width: 100%;
@@ -51,7 +53,7 @@
   .navigation h4{
     font-weight: 500;
     font-size: 15px;
-    color: rgba(0, 0, 0, 0.509);
+    color: var(--text);
   }
 
   .drawer.closed .navigation{
@@ -73,7 +75,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.201); padding-bottom: 5px;
+    border-bottom: 1px solid var(--bars);
+    padding-bottom: 5px;
   }
 
   .container {
@@ -108,7 +111,7 @@
   }
 
   .circle{
-    background-color: #ffffff6f;
+    background-color: var(--primary);
     border-radius: 30px;
     min-height: 40px;
     min-width: 40px;

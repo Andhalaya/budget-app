@@ -1,5 +1,4 @@
 
-
 .monthly-budget{
     width: 100%;
     padding-left: 40px;
@@ -7,7 +6,7 @@
 
 .title{
     background-color: #EBEBEB;
-    background-color: #ffffff6f;
+    background-color: var(--boxes);
     backdrop-filter: blur(5px);
     border-radius: 10px;
     padding: 10px 20px;
@@ -19,14 +18,6 @@
     margin-top: 40px;
 }
 
-.s-list{
-    background-color: #EBEBEB;
-    background-color: #ffffff6f;
-    backdrop-filter: blur(5px);
-    height: 270px;
-    width: 75%;
-    border-radius: 10px;
-}
 
 .expenses-boxes{
     display: flex;
@@ -58,7 +49,7 @@
 }
 
 .e-box{
-    background-color: #ffffff6f;
+    background-color: var(--boxes);
     backdrop-filter: blur(5px);
     height: 100%;
     padding: 10px 15px;
@@ -92,7 +83,7 @@
 .total{
     display: flex;
     justify-content: space-between;
-    border-top: 2px solid rgba(0, 0, 0, 0.158);
+    border-top: 2px solid var(--bars);
     padding-top: 5px;
 }
 
@@ -103,12 +94,20 @@
 }
 
 .s-list{
-    padding: 10px 15px;
+    padding: 10px 15px; 
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     gap: 10px;
+    background-color: #EBEBEB;
+    background-color: var(--boxes);
+    backdrop-filter: blur(5px);
+    min-height: 270px;
+    overflow-y: scroll;
+    width: 75%;
 }
+
 
 .summary-box{
     display: flex;
@@ -125,5 +124,5 @@
 
 .s-list h2{
     font-weight: 400;
-    border-bottom: 1px solid #0000002c;
+    border-bottom: 1px solid var(--bars);
 }
