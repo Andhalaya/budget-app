@@ -60,15 +60,6 @@
     display: flex;
 }
 
-.icon{
-    color: rgb(255, 255, 255);
-}
-
-.icon:hover{
-    cursor: pointer;
-    color: sandybrown;
-}
-
 .add-btn{
     background-color: transparent;
     color: rgb(255, 150, 58);

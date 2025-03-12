@@ -26,7 +26,7 @@ export default function Categories() {
     const [newCategoryName, setNewCategoryName] = useState("");
     const [showCategoryForm, setShowCategoryForm] = useState(false);
     const [showSubcategoryForm, setShowSubcategoryForm] = useState(false);
-    const [color, setColor] = useState("#000000");
+    const [color, setColor] = useState("white");
     const [icon, setIcon] = useState("FaUtensils");
 
     const colorOptions = [
