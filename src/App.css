@@ -80,3 +80,6 @@ button {
     color: white;
 }
 
+.flex{
+    display: flex;
+}
