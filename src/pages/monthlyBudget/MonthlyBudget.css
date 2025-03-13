@@ -8,7 +8,7 @@
     background-color: #EBEBEB;
     background-color: var(--boxes);
     backdrop-filter: blur(5px);
-    border-radius: 10px;
+    border-radius: 19px;
     padding: 10px 20px;
     text-align: center;
 }
@@ -91,6 +91,8 @@
     display: flex;
     justify-content: space-between;
     gap: 20px;
+    max-height: 236px;
+    overflow-y: scroll;
 }
 
 .s-list{
@@ -103,8 +105,6 @@
     background-color: #EBEBEB;
     background-color: var(--boxes);
     backdrop-filter: blur(5px);
-    min-height: 270px;
-    overflow-y: scroll;
     width: 75%;
 }
 

@@ -34,6 +34,7 @@ export function ThemeProvider({ children }) {
             document.documentElement.style.setProperty("--boxes", themeVars.boxes);
             document.documentElement.style.setProperty("--primary", themeVars.primary);
             document.documentElement.style.setProperty("--bars", themeVars.bars);
+            document.documentElement.style.setProperty("--circles", themeVars.circles);
         }
     }, [theme, user]);
 

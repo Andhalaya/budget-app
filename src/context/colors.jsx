@@ -1,11 +1,12 @@
 const themes = {
     light: {
         name: "light",
-        background1: "#caa6ff",
-        background2: "#5ea8ff",
-        text: "#00000070",
-        boxes: "#ffffff6f",
-        bars: "#0000002c"
+        background1: "white",
+        background2: "white",
+        text: "#000000ab",
+        boxes: "#EBEBEB",
+        bars: "#0000002c",
+        circles: "white"
     },
     dark: {
         name: "dark",
@@ -26,13 +27,13 @@ const themes = {
         bars: "#0000002c"
     },
     purple: {
-        name: "purple",
-        background1: "#3d214a",
-        background2: "#3d214a",
-        text: "#f8c471",
-        boxes: "#4a235a",
-        primary: "#8e44ad",
-        bars: "#0000002c"
+        name: "light",
+        background1: "#caa6ff",
+        background2: "#5ea8ff",
+        text: "#00000070",
+        boxes: "#ffffff6f",
+        bars: "#0000002c",
+        circles: "#ffffffb5"
     },
 };
 

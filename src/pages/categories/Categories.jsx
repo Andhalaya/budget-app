@@ -2,6 +2,7 @@ import { useState } from "react";
 import * as Icons from "../../assets/Icons";
 import { useCategories } from "../../hooks/useCategories";
 import "./Categories.css";
+import { categoryColors, categoryIcons } from "./CategoryConfig";
 import DropdownSelector from "../../components/Dropdown/DropdownSelector";
 
 export default function Categories() {
@@ -26,37 +27,16 @@ export default function Categories() {
     const [newCategoryName, setNewCategoryName] = useState("");
     const [showCategoryForm, setShowCategoryForm] = useState(false);
     const [showSubcategoryForm, setShowSubcategoryForm] = useState(false);
-    const [color, setColor] = useState("white");
-    const [icon, setIcon] = useState("FaUtensils");
-
-    const colorOptions = [
-        { name: "Red", value: "#e74c3c" },
-        { name: "Blue", value: "#3498db" },
-        { name: "Green", value: "#2ecc71" },
-        { name: "Yellow", value: "#f1c40f" },
-        { name: "Purple", value: "#9b59b6" },
-        { name: "Orange", value: "#e67e22" },
-        { name: "Gray", value: "#95a5a6" },
-    ];
-
-    const iconOptions = [
-        { name: "Food", value: "FaUtensils", component: <Icons.FaUtensils /> },
-        { name: "Transport", value: "FaCar", component: <Icons.FaCar /> },
-        { name: "Home", value: "FaHome", component: <Icons.FaHome /> },
-        { name: "Shopping", value: "FaShoppingCart", component: <Icons.FaShoppingCart /> },
-        { name: "Travel", value: "FaPlane", component: <Icons.FaPlane /> },
-        { name: "Health", value: "FaHeart", component: <Icons.FaHeart /> },
-        { name: "Utilities", value: "FaBolt", component: <Icons.FaBolt /> },
-        { name: "Entertainment", value: "FaMusic", component: <Icons.FaMusic /> },
-    ];
+    const [color, setColor] = useState(categoryColors[0].value);
+    const [icon, setIcon] = useState(categoryIcons[0].value);
 
     // Handle Category Submission
     const handleSubmit = (e) => {
         e.preventDefault();
         addOrUpdateCategory(name, color, icon, [], editId);
         setName("");
-        setColor("#000000");
-        setIcon("FaUtensils");
+        setColor(categoryColors[0].value);
+        setIcon(categoryIcons[0].value);
         setEditId(null);
     };
 
@@ -113,8 +93,8 @@ export default function Categories() {
                         onChange={(e) => setName(e.target.value)}
                         required
                     />
-                    <DropdownSelector options={colorOptions} selected={color} setSelected={setColor} type="color" />
-                    <DropdownSelector options={iconOptions} selected={icon} setSelected={setIcon} type="icon" />
+                    <DropdownSelector options={categoryColors} selected={color} setSelected={setColor} type="color" />
+                    <DropdownSelector options={categoryIcons} selected={icon} setSelected={setIcon} type="icon" />
                     <button type="submit">Add</button>
                     <button onClick={() => setShowCategoryForm(false)}>cancel</button>
                 </form>
@@ -157,7 +137,7 @@ export default function Categories() {
                         <h3>Categories</h3>
                         <div className="box">
                             {categories.map((category) => {
-                                const IconComponent = iconOptions.find((icon) => icon.value === category.icon)?.component || <Icons.FaUtensils />;
+                                const IconComponent = categoryIcons.find((icon) => icon.value === category.icon)?.component || <Icons.FaUtensils />;
                                 return (
                                     <div className="list-element" key={category.id} style={{ backgroundColor: category.color }}>
                                         {editingCategory === category.id ? (
