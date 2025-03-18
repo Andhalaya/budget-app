@@ -151,6 +151,10 @@ background-color: transparent;
       width: 60px;
   }
 
+  .drawer.open{
+    width: 200px;
+  }
+
   .main {
       margin-left: 60px;
   }

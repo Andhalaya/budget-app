@@ -84,7 +84,8 @@ export default function Categories() {
         <div className="categories">
             <div className="title">
                 <h1>Categories & Subcategories</h1>
-                <h2>manage properties</h2>
+                <h2>manage prope         
+                    rties</h2>
             </div>
             <div className="c-content">
                 <div className="left-container">

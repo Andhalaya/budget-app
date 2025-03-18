@@ -66,6 +66,18 @@ div{
     margin-left: 13%;
 }
 
+/* @media (min-width: 900px) {
+    .main.expanded{
+      margin-left: 20%;  
+    } 
+} */
+ 
+ @media screen and  (max-width: 900px) {
+    .main.expanded{
+      margin-left: 20%;  
+    } 
+} 
+
 .main.collapsed {
     margin-left: 60px;
 }

@@ -37,9 +37,9 @@ export default function Home() {
   return (
     <div className="home">
       <Drawer onSelect={setActiveComponent} isOpen={isDrawerOpen} setIsOpen={setIsDrawerOpen}/>
-          <div className={`main ${isDrawerOpen ? "expanded" : "collapsed"}`}>
-            {components[activeComponent] || <h2>Page Not Found</h2>}
-          </div> 
+      <div className={`main ${isDrawerOpen ? "expanded" : "collapsed"}`}>
+          {components[activeComponent] || <h2>Page Not Found</h2>}
+      </div> 
     </div>
   );
 }
